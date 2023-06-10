@@ -1,0 +1,22 @@
+.logout-button {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    color: #333333;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #dddddd;
+    color: #333333;
+  }
+  
+  .logout-button:focus {
+    outline: none;
+  }
+  
