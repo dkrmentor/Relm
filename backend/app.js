@@ -11,8 +11,6 @@ const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.json());
-app.use(express.static('uploads'));
 app.use(cors());
 
 
@@ -40,8 +38,8 @@ app.use('/', ForgetPassRoute);
 app.use('/', UserProfile);
 
 
-app.listen(3000, () => {
-  console.log('server created on 3000');
+app.listen(3001, () => {
+  console.log('server created on 3001');
   connectToDatabase();
 });
 

@@ -1,45 +1,65 @@
-import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { userProfile } from "../../api";
+import "../../assets/Style/addprofile.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../loading_spinner";
-// import { updateProfile } from "../../api";
-import "../../assets/Style/addprofile.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 
 const InterestMatching = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [accordionValues, setAccordionValues] = useState({
-    accordion1: "",
-    accordion2: "",
-    accordion3: "",
-    accordion4: "",
-    accordion5: "",
-    accordion6: "",
-    accordion7: ""
+  const [formValues, setFormValues] = useState({
+    "health&fitness": "",
+    "sportsAndCreation": "",
+    "creative&Performance": "",
+    "specialInterestHousing": "",
+    "educationAndStudentLife": "",
+    "lifestyle&entertainment": "",
+    "businessAndEntrepreneurship": ""
   });
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
-  const handleAccordionChange = (accordion, value) => {
-    setAccordionValues((prevValues) => ({
+  useEffect(() => {
+    setToken(localStorage.getItem("token"))
+    setUserId(localStorage.getItem("userId"))
+    setFormValues((prevValues) => ({
       ...prevValues,
-      [accordion]: value
+    }));
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const invalidAccordions = Object.values(formValues).some((value) => value === "");
+    if (invalidAccordions) {
+      toast.error("Please fill in all the accordions", { autoClose: 2000 });
+      return;
+    }
+
     setIsLoading(true);
 
-    const token = localStorage.getItem("token");
-    const userId = 1; // Set the appropriate user ID
-
     try {
-      // await updateProfile(userId, token, accordionValues);s
-      toast.success("Profile updated", { autoClose: 2000 });
+      const profileData = formValues;
+      console.log("profileData");
+console.log(profileData);
+      await userProfile(userId, token, profileData);
+
+      toast.success("Profile added", { autoClose: 2000 });
       navigate("/interestmatching"); // Redirect to "/interestmatching"
     } catch (error) {
-      toast.error("Error updating profile", { autoClose: 2000 });
+      toast.error("Error creating profile", { autoClose: 2000 });
     }
 
     setIsLoading(false);
@@ -47,89 +67,134 @@ const InterestMatching = () => {
 
   return (
     <div className="user-info layout-container">
-      <div className="accordion-container">
+      <form>
         <div className="accordion">
-          <input
-            type="checkbox"
-            id="accordion1"
-            className="accordion-input"
-          />
-          <label className="accordion-label" htmlFor="accordion1">
-            Accordion 1
-          </label>
-          <div className="accordion-content">
-            <div className="choices">
-              <label>
-                <input
-                  type="radio"
-                  name="accordion1"
-                  value="Choice 1"
-                  checked={accordionValues.accordion1 === "Choice 1"}
-                  onChange={() => handleAccordionChange("accordion1", "Choice 1")}
-                />
-                Choice 1
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accordion1"
-                  value="Choice 2"
-                  checked={accordionValues.accordion1 === "Choice 2"}
-                  onChange={() => handleAccordionChange("accordion1", "Choice 2")}
-                />
-                Choice 2
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accordion1"
-                  value="Choice 3"
-                  checked={accordionValues.accordion1 === "Choice 3"}
-                  onChange={() => handleAccordionChange("accordion1", "Choice 3")}
-                />
-                Choice 3
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accordion1"
-                  value="Choice 4"
-                  checked={accordionValues.accordion1 === "Choice 4"}
-                  onChange={() => handleAccordionChange("accordion1", "Choice 4")}
-                />
-                Choice 4
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="accordion1"
-                  value="Choice 5"
-                  checked={accordionValues.accordion1 === "Choice 5"}
-                  onChange={() => handleAccordionChange("accordion1", "Choice 5")}
-                />
-                Choice 5
-              </label>
-            </div>
-          </div>
+          <h2>Health & Fitness</h2>
+          <select
+            name="health&fitness"
+            value={formValues["health&fitness"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
         </div>
 
-        {/* Repeat the above structure for the remaining accordions */}
-        {/* Accordion 2 */}
-        {/* Accordion 3 */}
-        {/* Accordion 4 */}
-        {/* Accordion 5 */}
-        {/* Accordion 6 */}
-        {/* Accordion 7 */}
-      </div>
+        <div className="accordion">
+          <h2>Sports and Creation</h2>
+          <select
+            name="sportsAndCreation"
+            value={formValues["sportsAndCreation"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
 
-      <button
-        className="submit-button"
-        onClick={handleSubmit}
-        disabled={isLoading}
-      >
-        {isLoading ? <LoadingSpinner /> : <FontAwesomeIcon icon={faAngleRight} />}
-      </button>
+        <div className="accordion">
+          <h2>Creative & Performance</h2>
+          <select
+            name="creative&Performance"
+            value={formValues["creative&Performance"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
 
+        <div className="accordion">
+          <h2>Special Interest Housing</h2>
+          <select
+            name="specialInterestHousing"
+            value={formValues["specialInterestHousing"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
+
+        <div className="accordion">
+          <h2>Education and Student Life</h2>
+          <select
+            name="educationAndStudentLife"
+            value={formValues["educationAndStudentLife"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
+
+        <div className="accordion">
+          <h2>Lifestyle & Entertainment</h2>
+          <select
+            name="lifestyle&entertainment"
+            value={formValues["lifestyle&entertainment"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
+
+        <div className="accordion">
+          <h2>Business and Entrepreneurship</h2>
+          <select
+            name="businessAndEntrepreneurship"
+            value={formValues["businessAndEntrepreneurship"]}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select option</option>
+            <option value="Option 1">Option 1</option>
+            <option value="Option 2">Option 2</option>
+            <option value="Option 3">Option 3</option>
+            <option value="Option 4">Option 4</option>
+            <option value="Option 5">Option 5</option>
+          </select>
+        </div>
+
+        <button
+          className="submit-button"
+          onClick={handleSubmit}
+          disabled={isLoading}
+        >
+          {isLoading ? <LoadingSpinner /> : <FontAwesomeIcon icon={faAngleRight} />}
+        </button>
+      </form>
       <ToastContainer />
     </div>
   );

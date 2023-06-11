@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: relm
 -- ------------------------------------------------------
--- Server version	8.0.33
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -30,10 +30,11 @@ CREATE TABLE `users` (
   `current_city` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `birthday` varchar(255) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `interest` json DEFAULT NULL,
   `known_languages` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `images` json DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -44,7 +45,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'fahad','1234','djslf','jsajdoajdojaslkdjlajld','d@gmailcom.com','j',NULL,'dadadr tget','{\"health&fitness\": \"health\", \"sportsAndCreation\": \"nothing\", \"creative&Performance\": \"dk\", \"specialInterestHousing\": \"eating\", \"educationAndStudentLife\": \"bscs\", \"lifestyle&entertainment\": \"driving\", \"buisnessAndEnterprenuership\": \"job\"}','dasdsadsad'),(2,'test','123',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (1,'fahad','1234','djslf','jsajdoajdojaslkdjlajld','d@gmailcom.com','j','dadadr tget','{\"health&fitness\": \"health\", \"sportsAndCreation\": \"nothing\", \"creative&Performance\": \"dk\", \"specialInterestHousing\": \"eating\", \"educationAndStudentLife\": \"bscs\", \"lifestyle&entertainment\": \"driving\", \"buisnessAndEnterprenuership\": \"job\"}','dasdsadsad','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjg2MzIzODI5LCJleHAiOjE2ODY0OTY2Mjl9.PA-jPrzUrXIB_tpYgqx58ZaNLtSEj_YsbHTxf-Zvvo8',NULL),(2,'test','12345678','male','karachi','saad@gmail.com','3-11-2001','saad ali',NULL,'Urdu','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY4NjMyNTE2MSwiZXhwIjoxNjg2NDk3OTYxfQ.Uw7aOk_80-4u7B85r2womL8EBvLR3KENevlutXKvxSw','{\"images\": [\"http://192.168.0.130:3000/uploads/1686318539037-315871983.PNG\"]}');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-09 15:52:46
+-- Dump completed on 2023-06-10 20:17:44

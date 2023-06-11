@@ -21,12 +21,21 @@ const AddProfile = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
   useEffect(() => {
+   
+     setToken(localStorage.getItem("token"))
+     setUserId(localStorage.getItem("userId"))
     setFormValues((prevValues) => ({
       ...prevValues,
     }));
   }, []);
+  
+
+
+//  const userId = 1; 
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -95,8 +104,8 @@ const AddProfile = () => {
 
     setIsLoading(true);
 
-    const token = localStorage.getItem("token");
-    const userId = 1; 
+    
+
 
     try {
       const profileData = {
@@ -109,7 +118,9 @@ const AddProfile = () => {
         known_languages,
       };
 
+console.log(userId)
       await userProfile(userId, token, profileData);
+      console.log(userId)
       toast.success("Profile added", { autoClose: 2000 });
       navigate("/interestmatching"); // Redirect to "/interestmatching"
     } catch (error) {

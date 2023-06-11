@@ -8,44 +8,29 @@ const fs = require('fs');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '../../uploads/'.replace(/ /g, '_')))
+    cb(null, path.join(__dirname, '../../uploads').replace(/ /g, '_'));
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9) + path.extname(file.originalname);
-    cb(null, uniqueSuffix)
+    cb(null, uniqueSuffix);
   }
 });
 
 const upload = multer({ storage: storage });
 
-router.put('/userprofile/:id', async (req, res) => {
-
-  console.log("working");
+router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
 
   const { id } = req.params;
-  const { name, birthday, gender, current_city, email, known_languages } = req.body;
+  console.log(id);
+  const { name, birthday, gender, current_city, email, known_languages, interest } = req.body;
 
-  console.log(req.body);
-  console.log(req.params.id);
-
-  // const contentFile = req.files;
-  // let content = [];
-
-  // if (content) {
-  //   for (let index = 0; index < contentFile.length; index++) {
-  //     const element = contentFile[index];
-
-  //     content.push("http://192.168.0.130:3000" + "/uploads/" + element.filename);
-  //   }
-  // }
-
-
-
+  
   try {
-    if (gender === "") {
-
-      const query = 'UPDATE users SET interest = ?, images = ? WHERE id = ?';
-      const values = [JSON.stringify({ "interests": interest }), id];
+  console.log( "interest",interest);
+    if (  gender == "undefined") {
+console.log("if")
+      const query = 'UPDATE users SET interest = ? WHERE id = ?';
+      const values = [ interest, id];
 
       connection.query(query, values, (error, results) => {
         if (error) {
@@ -57,7 +42,20 @@ router.put('/userprofile/:id', async (req, res) => {
         res.status(200).json({ message: 'User profile updated successfully' });
       });
 
-    } else {
+    } else {console.log("else")
+    
+  const contentFile = req.files;
+  let content = [];
+
+  if (contentFile) {
+    for (let index = 0; index < contentFile.length; index++) {
+      const element = contentFile[index];
+      content.push(`http://192.168.0.146:3001/uploads/${element.filename}`);
+
+      // content.push("http://192.168.0.146:3001/uploads/"+element.filename);
+    }
+  }
+
       const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ? WHERE id = ?';
       const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), id];
 
@@ -76,6 +74,47 @@ router.put('/userprofile/:id', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
+// router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
+   
+//   const { id } = req.params;
+//   const { name, birthday, gender, current_city, email, known_languages } = req.body;
+
+//   // let photoUrl = null;
+//   // let profilePicture = null;
+//   // const file = req.file;
+//   const contentFile = req.files;
+//   let content = [];
+
+//   if (content) {
+//     for (let index = 0; index < contentFile.length; index++) {
+//       const element = contentFile[index];
+//       content.push("http://192.168.0.130:3000" + "/uploads/" + element.filename);
+//     }
+    
+//     // profilePicture = file.filename;
+//     // photoUrl = `${"http://localhost:3000"}/uploads/profile_picture/${profilePicture}`;
+//   }
+
+//   try {
+//     const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ? WHERE id = ?';
+//     const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), id];
+
+//     connection.query(query, values, (error, results) => {
+//       if (error) {
+//         console.error('Error executing MySQL query:', error);
+//         res.status(500).json({ message: 'Internal Server Error' });
+//         return;
+//       }
+
+//       res.status(200).json({ message: 'User profile updated successfully' });
+//     });
+//   } catch (error) {
+//     console.error('Error updating user profile:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
 
 
 router.get('/getuser/:id', (req, res) => {
@@ -106,36 +145,36 @@ router.get('/getuser/:id', (req, res) => {
 });
 
 
-router.put('/addinterest/:id', (req, res) => {
-  const { id } = req.params;
-  const { interests } = req.body;
+// router.put('/addinterest/:id', (req, res) => {
+//   const { id } = req.params;
+//   const { interests } = req.body;
 
-  const interestsJSON = JSON.stringify(interests);
+//   const interestsJSON = JSON.stringify(interests);
 
-  const query = 'UPDATE users SET interest = ? WHERE id = ?';
-  const values = [interestsJSON, id];
+//   const query = 'UPDATE users SET interest = ? WHERE id = ?';
+//   const values = [interestsJSON, id];
 
-  const bearerToken = req.headers.authorization;
+  // const bearerToken = req.headers.authorization;
 
-  if (!bearerToken) {
-    res.status(401).json({ message: 'Bearer token is missing' });
-    return;
-  }
+  // if (!bearerToken) {
+  //   res.status(401).json({ message: 'Bearer token is missing' });
+  //   return;
+  // }
 
-  connection.query(query, values, (error, results) => {
-    if (error) {
-      console.error('Error executing MySQL query:', error);
-      res.status(500).json({ message: 'Internal Server Error' });
-      return;
-    }
+//   connection.query(query, values, (error, results) => {
+//     if (error) {
+//       console.error('Error executing MySQL query:', error);
+//       res.status(500).json({ message: 'Internal Server Error' });
+//       return;
+//     }
 
-    if (results.affectedRows === 0) {
-      res.status(404).json({ message: 'User not found' });
-    } else {
-      res.status(200).json({ message: 'User data updated successfully' });
-    }
-  });
-});
+//     if (results.affectedRows === 0) {
+//       res.status(404).json({ message: 'User not found' });
+//     } else {
+//       res.status(200).json({ message: 'User data updated successfully' });
+//     }
+//   });
+// });
 
 
 
