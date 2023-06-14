@@ -5,7 +5,6 @@ const Views = () => {
   return (
     <div>
       <AddProfile />
-    
       
     </div>
   )

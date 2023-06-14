@@ -4,6 +4,8 @@ import Login from "./components/Auth/Login";
 import Layout from "./Layout";
 import Views from "./Screens/Views.js";
 import InterestMatching from "./Screens/Users/InterestMatching";
+import Home from "./Screens/Home";
+import TravelBucketlist from "./Screens/Users/travelbucketlist";
 
 export const AuthContext = createContext();
 
@@ -33,11 +35,15 @@ const App = () => {
               <Route path="/" element={<Layout />}>
               <Route path="/" element={<Views />} />
               <Route path="/interestmatching" element={<InterestMatching />} />
+              <Route path="/travelbucketlist" element={<TravelBucketlist />} />
 
               </Route>
+              <Route path="/home" element={<Home />} />
+
               
 
             </>
+            
           )}
       </Routes>
     </AuthContext.Provider>

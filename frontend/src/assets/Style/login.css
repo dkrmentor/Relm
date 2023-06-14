@@ -1,12 +1,3 @@
-body {
-  background: linear-gradient(180deg, #527190, #eac1f7);
-  padding: 0px 20px;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .login-page {
   background-color: white;
@@ -87,7 +78,7 @@ body {
   margin: 0;
 }
 
-.login-page .ending-container img {
+.login-page .ending-container svg {
   margin: 5px;
 }
 

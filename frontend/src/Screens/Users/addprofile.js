@@ -34,8 +34,6 @@ const AddProfile = () => {
   
 
 
-//  const userId = 1; 
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;

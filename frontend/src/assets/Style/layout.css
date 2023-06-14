@@ -2,11 +2,34 @@
 body {
     background: linear-gradient(180deg, #527190, #eac1f7);
     padding: 0px 20px;
-    margin: 0;
+
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 10px;
+
+}
+
+.submit-button {
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+ cursor: pointer;
+  transition: all 0.2s ease;
+  color: #212121;
+  width: 100%;
+  background-color: unset;
+  text-align: right;
+  z-index: 99999 !important;
+
+
+}
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }
 
 .layout {
@@ -60,4 +83,6 @@ body {
 }
 .user-info.layout-container{
   height: 44vh;
+  justify-content: center;
+
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { userProfile } from "../../api";
-import "../../assets/Style/addprofile.css";
+import "../../assets/Style/interestmatching.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../loading_spinner";
@@ -53,11 +53,11 @@ const InterestMatching = () => {
     try {
       const profileData = formValues;
       console.log("profileData");
-console.log(profileData);
+      console.log(profileData);
       await userProfile(userId, token, profileData);
 
       toast.success("Profile added", { autoClose: 2000 });
-      navigate("/interestmatching"); // Redirect to "/interestmatching"
+      navigate("/travelbucketlist"); // Redirect 
     } catch (error) {
       toast.error("Error creating profile", { autoClose: 2000 });
     }
@@ -69,121 +69,128 @@ console.log(profileData);
     <div className="user-info layout-container">
       <form>
         <div className="accordion">
-          <h2>Health & Fitness</h2>
+          {/* <h2>Health & Fitness</h2> */}
           <select
             name="health&fitness"
             value={formValues["health&fitness"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Health & Fitness</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Sports and Creation</h2>
+          {/* <h2>Sports and Creation</h2> */}
           <select
             name="sportsAndCreation"
             value={formValues["sportsAndCreation"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Sports and Creation</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Creative & Performance</h2>
+          {/* <h2>Creative & Performance</h2> */}
           <select
             name="creative&Performance"
             value={formValues["creative&Performance"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Creative & Performance</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Special Interest Housing</h2>
+          {/* <h2>Special Interest Housing</h2> */}
           <select
             name="specialInterestHousing"
             value={formValues["specialInterestHousing"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Special Interest Housing</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Education and Student Life</h2>
+          {/* <h2>Education and Student Life</h2> */}
           <select
             name="educationAndStudentLife"
             value={formValues["educationAndStudentLife"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Education and Student Life</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Lifestyle & Entertainment</h2>
+          {/* <h2>Lifestyle & Entertainment</h2> */}
           <select
             name="lifestyle&entertainment"
             value={formValues["lifestyle&entertainment"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Lifestyle & Entertainment</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 
         <div className="accordion">
-          <h2>Business and Entrepreneurship</h2>
+          {/* <h2>Business and Entrepreneurship</h2> */}
           <select
             name="businessAndEntrepreneurship"
             value={formValues["businessAndEntrepreneurship"]}
             onChange={handleChange}
             required
           >
-            <option value="">Select option</option>
-            <option value="Option 1">Option 1</option>
-            <option value="Option 2">Option 2</option>
-            <option value="Option 3">Option 3</option>
-            <option value="Option 4">Option 4</option>
-            <option value="Option 5">Option 5</option>
+            <option disabled value="">Business and Entrepreneurship</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Masters">Masters</option>
+            <option value="Doctorate">Doctorate</option>
+            <option value="Greek Associations">Greek Associations</option>
+            <option value="Foreign Exchange">Foreign Exchange</option>
           </select>
         </div>
 

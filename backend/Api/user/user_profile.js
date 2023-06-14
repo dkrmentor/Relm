@@ -51,8 +51,6 @@ console.log("if")
     for (let index = 0; index < contentFile.length; index++) {
       const element = contentFile[index];
       content.push(`http://192.168.0.146:3001/uploads/${element.filename}`);
-
-      // content.push("http://192.168.0.146:3001/uploads/"+element.filename);
     }
   }
 
@@ -76,46 +74,7 @@ console.log("if")
 });
 
 
-// router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
-   
-//   const { id } = req.params;
-//   const { name, birthday, gender, current_city, email, known_languages } = req.body;
-
-//   // let photoUrl = null;
-//   // let profilePicture = null;
-//   // const file = req.file;
-//   const contentFile = req.files;
-//   let content = [];
-
-//   if (content) {
-//     for (let index = 0; index < contentFile.length; index++) {
-//       const element = contentFile[index];
-//       content.push("http://192.168.0.130:3000" + "/uploads/" + element.filename);
-//     }
-    
-//     // profilePicture = file.filename;
-//     // photoUrl = `${"http://localhost:3000"}/uploads/profile_picture/${profilePicture}`;
-//   }
-
-//   try {
-//     const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ? WHERE id = ?';
-//     const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), id];
-
-//     connection.query(query, values, (error, results) => {
-//       if (error) {
-//         console.error('Error executing MySQL query:', error);
-//         res.status(500).json({ message: 'Internal Server Error' });
-//         return;
-//       }
-
-//       res.status(200).json({ message: 'User profile updated successfully' });
-//     });
-//   } catch (error) {
-//     console.error('Error updating user profile:', error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
-
+ 
 
 router.get('/getuser/:id', (req, res) => {
   const { id } = req.params;
@@ -143,38 +102,6 @@ router.get('/getuser/:id', (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
-
-// router.put('/addinterest/:id', (req, res) => {
-//   const { id } = req.params;
-//   const { interests } = req.body;
-
-//   const interestsJSON = JSON.stringify(interests);
-
-//   const query = 'UPDATE users SET interest = ? WHERE id = ?';
-//   const values = [interestsJSON, id];
-
-  // const bearerToken = req.headers.authorization;
-
-  // if (!bearerToken) {
-  //   res.status(401).json({ message: 'Bearer token is missing' });
-  //   return;
-  // }
-
-//   connection.query(query, values, (error, results) => {
-//     if (error) {
-//       console.error('Error executing MySQL query:', error);
-//       res.status(500).json({ message: 'Internal Server Error' });
-//       return;
-//     }
-
-//     if (results.affectedRows === 0) {
-//       res.status(404).json({ message: 'User not found' });
-//     } else {
-//       res.status(200).json({ message: 'User data updated successfully' });
-//     }
-//   });
-// });
 
 
 

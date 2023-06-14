@@ -6,6 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import logoIcon from '../../assets/Images/logoIcon.png';
 import "../../assets/Style/login.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 
 const LoginPage = () => {
   const { handleLogin } = useContext(AuthContext);
@@ -78,8 +81,8 @@ const LoginPage = () => {
       <div className="extra-container mid-container mid3">
         <div className="ending-container">
           <p className="">Sign in with</p>
-          <img width="40" src={logoIcon} alt="Logo" />
-          <img width="40" src={logoIcon} alt="Logo" />
+          <FontAwesomeIcon icon={faLinkedin} size="2x" />
+      <FontAwesomeIcon icon={faInstagram}  size="2x" />
         </div>
         <div className="ending-container">
           <p className="foot-title">Terms of Service | Privacy Policy | Help</p>

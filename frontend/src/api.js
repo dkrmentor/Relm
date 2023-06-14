@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://192.168.100.8:3001";
+const BASE_URL = "http://192.168.0.146:3001";
 
 export const postLogin = async (username, password) => {
   try {
@@ -38,7 +38,6 @@ export const userProfile = async (userId, token, profileData) => {
 
 
     formData.append('interest', JSON.stringify(profileData));
-    // console.log("interest",profileData["interest"]]);
 console.log(formData);
 console.log(profileData.interest);
     const response = await axios.put(`${BASE_URL}/userProfile/${userId}`, formData, {

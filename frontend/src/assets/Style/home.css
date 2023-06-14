@@ -1,0 +1,94 @@
+.home-container
+{    min-height: 95vh;
+
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px;
+  padding: 0px 20px;
+  width: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.home-container .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px; /* Adjust the width to make the toggle smaller */
+  height: 24px; /* Adjust the height to make the toggle smaller */
+}
+
+.home-container .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px; /* Adjust the border-radius to make the toggle round */
+}
+
+.home-container .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; /* Adjust the height to make the toggle circle smaller */
+  width: 18px; /* Adjust the width to make the toggle circle smaller */
+  left: 3px; /* Adjust the positioning to center the circle */
+  bottom: 3px; /* Adjust the positioning to center the circle */
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.home-container input:checked + .slider {
+  background-color: #2196F3;
+}
+
+.home-container input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.home-container input:checked + .slider:before {
+  transform: translateX(16px); /* Adjust the positioning to make the toggle move */
+}
+
+.home-container .slider.round {
+  border-radius: 24px;
+}
+
+.home-container .slider.round:before {
+  border-radius: 50%;
+}
+
+.home-container .title span {
+  margin-right: 0.5rem; /* Adjust the spacing between the title and the toggle */
+}
+
+.home-container .title .switch {
+  margin-left: 0.5rem; /* Adjust the spacing between the title and the toggle */
+}
+
+
+.title , .navigation-row {
+  margin: 10px;
+}
+.home-container {
+  text-align: center;
+}
+
+button.navigation {
+  padding: 10px;
+  border-radius: 50px;
+}
+
+.title-row {
+  margin: 30px 0px;
+}
+
+.pic-container img{
+  border-radius: 100px;
+  width: 50%;
+}
