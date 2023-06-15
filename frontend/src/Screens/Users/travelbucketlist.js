@@ -33,25 +33,26 @@ const TravelBucketlist = () => {
       toast.error("Please add at least one city", { autoClose: 2000 });
       return;
     }
-
+  
     setIsLoading(true);
     console.log(cityList);
     try {
       const profileData = {
         cities: cityList,
-        
+        // Add other profile data properties here
       };
-     
+  
       await userProfile(userId, token, profileData);
-
+  
       toast.success("Profile updated", { autoClose: 2000 });
       navigate("/profile"); // Redirect to the profile page
     } catch (error) {
       toast.error("Error updating profile", { autoClose: 2000 });
     }
-
+  
     setIsLoading(false);
   };
+  
 
   return (
     <div className="travel-bucketlist layout-container">

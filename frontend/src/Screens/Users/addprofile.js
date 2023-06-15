@@ -5,8 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingSpinner from "../loading_spinner";
 import InputValidation from "../../components/common/InputValidation";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
 const AddProfile = () => {
@@ -23,17 +23,14 @@ const AddProfile = () => {
   const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
+
   useEffect(() => {
-   
-     setToken(localStorage.getItem("token"))
-     setUserId(localStorage.getItem("userId"))
+    setToken(localStorage.getItem("token"));
+    setUserId(localStorage.getItem("userId"));
     setFormValues((prevValues) => ({
       ...prevValues,
     }));
   }, []);
-  
-
-
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -50,7 +47,7 @@ const AddProfile = () => {
       photos: [...prevValues.photos, ...selectedPhotos],
     }));
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const {
@@ -102,9 +99,6 @@ const AddProfile = () => {
 
     setIsLoading(true);
 
-    
-
-
     try {
       const profileData = {
         name,
@@ -116,9 +110,7 @@ const AddProfile = () => {
         known_languages,
       };
 
-console.log(userId)
       await userProfile(userId, token, profileData);
-      console.log(userId)
       toast.success("Profile added", { autoClose: 2000 });
       navigate("/interestmatching"); // Redirect to "/interestmatching"
     } catch (error) {
@@ -131,54 +123,74 @@ console.log(userId)
   return (
     <div className="user-info layout-container">
       <form>
-        <InputValidation
-          name="name"
-          label="Name"
-          type="text"
-          value={formValues.name}
-          onChange={handleChange}
-          required
-          minLength={4}
-          maxLength={20}
-        />
-        <InputValidation
-          name="email"
-          label="Email"
-          type="email"
-          value={formValues.email}
-          onChange={handleChange}
-          required
-        />
-        <InputValidation
-          name="gender"
-          label="Gender"
-          type="text"
-          value={formValues.gender}
-          onChange={handleChange}
-          required
-        />
-        <InputValidation
-          name="birthday"
-          label="Birthday"
-          type="text"
-          value={formValues.birthday}
-          onChange={handleChange}
-          required
-        />
-        <InputValidation
-          name="current_city"
-          label="Current City"
-          type="text"
-          value={formValues.current_city}
-          onChange={handleChange}
-          required
-        />
+        <div className="inputRows">
+
+        <div className="input-validation">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formValues.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="input-validation">
+          <label htmlFor="gender">Gender:</label>
+          <select
+            id="gender"
+            name="gender"
+            value={formValues.gender}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        
+        </div>
+        <div className="input-validation">
+          <label htmlFor="birthday">Birthday:</label>
+          <input
+            type="date"
+            id="birthday"
+            name="birthday"
+            value={formValues.birthday}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="input-validation">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formValues.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="input-validation">
+          <label htmlFor="current_city">Current City:</label>
+          <input
+            type="text"
+            id="current_city"
+            name="current_city"
+            value={formValues.current_city}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <div className="input-validation">
           <label htmlFor="photos">Photos:</label>
           <input
             type="file"
-            name="photos"
             id="photos"
+            name="photos"
             onChange={handlePhotosChange}
             multiple
             accept="image/*"
@@ -198,20 +210,27 @@ console.log(userId)
             </div>
           )}
         </div>
-        <InputValidation
-          name="known_languages"
-          label="Known Languages"
-          type="text"
-          value={formValues.known_languages}
-          onChange={handleChange}
-          required
-        />
+        <div className="input-validation">
+          <label htmlFor="known_languages">Known Languages:</label>
+          <input
+            type="text"
+            id="known_languages"
+            name="known_languages"
+            value={formValues.known_languages}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <button
           className="submit-button"
           onClick={handleSubmit}
           disabled={isLoading}
         >
-          {isLoading ? <LoadingSpinner /> : <FontAwesomeIcon icon={faAngleRight} />}
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
+            <FontAwesomeIcon icon={faAngleRight} />
+          )}
         </button>
       </form>
       <ToastContainer />

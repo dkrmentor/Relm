@@ -52,7 +52,7 @@ const InterestMatching = () => {
 
     try {
       const profileData =  {
-        accordionList: JSON.stringify(formValues),
+        accordionList: formValues,
       }; 
      
       await userProfile(userId, token, profileData);

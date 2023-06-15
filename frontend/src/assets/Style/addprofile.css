@@ -11,7 +11,7 @@
   font-size: 1rem;
   border-radius: 0.25rem;
   border: none;
-  border-bottom: 2px solid black;  width: 100%;
+  border-bottom: 1px solid black;  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -33,4 +33,16 @@
 }
 
 
+select#gender {
+  border:unset;
+  border-bottom:1px solid black;
 
+}
+select{
+  padding: 0px !important;
+}
+
+.inputRows {
+  display: flex;
+  align-items: center;
+}

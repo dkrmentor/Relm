@@ -18,77 +18,43 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
-
-//   const { id } = req.params;
-//   console.log(id);
-//   const { name, birthday, gender, current_city, email, known_languages, interest } = req.body;
-
-  
-//   try {
-//   console.log( "interest",interest);
-//     if (  gender == "undefined") {
-// console.log("if")
-//       const query = 'UPDATE users SET interest = ? WHERE id = ?';
-//       const values = [ interest, id];
-
-//       connection.query(query, values, (error, results) => {
-//         if (error) {
-//           console.error('Error executing MySQL query:', error);
-//           res.status(500).json({ message: 'Internal Server Error' });
-//           return;
-//         }
-
-//         res.status(200).json({ message: 'User profile updated successfully' });
-//       });
-
-//     } else {console.log("else")
-    
-//   const contentFile = req.files;
-//   let content = [];
-
-//   if (contentFile) {
-//     for (let index = 0; index < contentFile.length; index++) {
-//       const element = contentFile[index];
-//       content.push(`http://192.168.0.146:3001/uploads/${element.filename}`);
-//     }
-//   }
-
-//       const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ? WHERE id = ?';
-//       const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), id];
-
-//       connection.query(query, values, (error, results) => {
-//         if (error) {
-//           console.error('Error executing MySQL query:', error);
-//           res.status(500).json({ message: 'Internal Server Error' });
-//           return;
-//         }
-
-//         res.status(200).json({ message: 'User profile updated successfully' });
-//       });
-//     }
-//   } catch (error) {
-//     console.error('Error updating user profile:', error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
-
-
- 
 router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
+
   const { id } = req.params;
   console.log(id);
-  const { name, birthday, gender, current_city, email, known_languages, interest, cities } = req.body;
+  const { name, birthday, gender, current_city, email, known_languages, interest , cities } = req.body;
 
-
+  
   try {
-    console.log("interest", interest);
-    if (gender === "undefined") {
-      console.log("if");
-      const query = 'UPDATE users SET interest = ?, cities = ? WHERE id = ?';
-      const values = [interest, JSON.stringify(cities), id];
+  console.log( "interest",interest);
+  console.log("cities");
+  console.log("cities",cities);
+  if ( cities != "undefined" ) {
+    console.log(" if")
+    const query = 'UPDATE users SET cities = ? WHERE id = ?';
+    const values = [ cities, id];
+
+
+    connection.query(query, values, (error, results) => {
+    
+      if (error) {
+        console.error('Error executing MySQL query:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+        return;
+      }
+
+      res.status(200).json({ message: 'User profile updated successfully' });
+    });
+
+  } 
+   else if ( interest != "undefined") {
+console.log("if")
+      const query = 'UPDATE users SET interest = ? WHERE id = ?';
+      const values = [ interest, id];
+
 
       connection.query(query, values, (error, results) => {
+      
         if (error) {
           console.error('Error executing MySQL query:', error);
           res.status(500).json({ message: 'Internal Server Error' });
@@ -97,20 +63,25 @@ router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
 
         res.status(200).json({ message: 'User profile updated successfully' });
       });
-    } else {
-      console.log("else");
-      const contentFile = req.files;
-      let content = [];
 
-      if (contentFile) {
-        for (let index = 0; index < contentFile.length; index++) {
-          const element = contentFile[index];
-          content.push(`http://192.168.0.146:3001/uploads/${element.filename}`);
-        }
-      }
+    }
+    
+    
+else {
+      console.log("else")
+    
+  const contentFile = req.files;
+  let content = [];
 
-      const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ?, cities = ? WHERE id = ?';
-      const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), JSON.stringify(cities), id];
+  if (contentFile) {
+    for (let index = 0; index < contentFile.length; index++) {
+      const element = contentFile[index];
+      content.push(`http://192.168.0.146:3001/uploads/${element.filename}`);
+    }
+  }
+
+      const query = 'UPDATE users SET name = ?, birthday = ?, gender = ?, current_city = ?, email = ?, known_languages = ?, images = ? WHERE id = ?';
+      const values = [name, birthday, gender, current_city, email, known_languages, JSON.stringify({ "images": content }), id];
 
       connection.query(query, values, (error, results) => {
         if (error) {
@@ -122,11 +93,15 @@ router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
         res.status(200).json({ message: 'User profile updated successfully' });
       });
     }
+     
   } catch (error) {
     console.error('Error updating user profile:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
+
 
 
  
