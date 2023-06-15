@@ -36,10 +36,14 @@ export const userProfile = async (userId, token, profileData) => {
 
     formData.append('known_languages', profileData.known_languages);
 
+    // Add the city list
 
-    formData.append('interest', JSON.stringify(profileData));
-console.log(formData);
-console.log(profileData.interest);
+    formData.append('interest', profileData.accordionList);
+console.log("profile data");
+    console.log(profileData);
+    formData.append('cities', profileData.cities); 
+
+  
     const response = await axios.put(`${BASE_URL}/userProfile/${userId}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

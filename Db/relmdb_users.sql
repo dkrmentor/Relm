@@ -35,6 +35,7 @@ CREATE TABLE `users` (
   `known_languages` varchar(255) DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   `images` json DEFAULT NULL,
+  `cities` json DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -45,7 +46,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'fahad','1234','male','dyhddhj','saad@gmail.com','39483','saadHh','{\"health&fitness\": \"Graduate\", \"sportsAndCreation\": \"Graduate\", \"creative&Performance\": \"Doctorate\", \"specialInterestHousing\": \"Greek Associations\", \"educationAndStudentLife\": \"Undergraduate\", \"lifestyle&entertainment\": \"Masters\", \"businessAndEntrepreneurship\": \"Masters\"}','jdhsisbs','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjg2NzQxNTk1LCJleHAiOjE2ODY5MTQzOTV9.twQNIVVl_6DJ-s0amylFn0l7pLwRK8y3GTMmtrYMetQ','{\"images\": [\"http://192.168.0.146:3001/uploads/1686741643095-408454053.jpg\"]}'),(2,'test','12345678','dsada','asdasdasd','fahad@gmail.com','sadsd','dasd','{\"health&fitness\": \"Graduate\", \"sportsAndCreation\": \"Graduate\", \"creative&Performance\": \"Graduate\", \"specialInterestHousing\": \"Graduate\", \"educationAndStudentLife\": \"Undergraduate\", \"lifestyle&entertainment\": \"Greek Associations\", \"businessAndEntrepreneurship\": \"Greek Associations\"}','hgfhfgh','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY4Njc0MTM4MiwiZXhwIjoxNjg2OTE0MTgyfQ.htFrvfN8b_gmPSn-SszoM2qOuD5SGWXcwqIV6-2-0KM','{\"images\": [\"http://192.168.0.146:3001/uploads/1686746321104-938246621.png\"]}');
+INSERT INTO `users` VALUES (1,'fahad','1234','male','dyhddhj','saad@gmail.com','39483','saadHh','{\"health&fitness\": \"Graduate\", \"sportsAndCreation\": \"Graduate\", \"creative&Performance\": \"Doctorate\", \"specialInterestHousing\": \"Greek Associations\", \"educationAndStudentLife\": \"Undergraduate\", \"lifestyle&entertainment\": \"Masters\", \"businessAndEntrepreneurship\": \"Masters\"}','jdhsisbs','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicGFzc3dvcmQiOiIxMjM0IiwiaWF0IjoxNjg2NzQxNTk1LCJleHAiOjE2ODY5MTQzOTV9.twQNIVVl_6DJ-s0amylFn0l7pLwRK8y3GTMmtrYMetQ','{\"images\": [\"http://192.168.0.146:3001/uploads/1686741643095-408454053.jpg\"]}',NULL),(2,'test','12345678','male','karachi','saad@gmail.com','3-11-2001','saad ali','{\"health&fitness\": \"Graduate\", \"sportsAndCreation\": \"Graduate\", \"creative&Performance\": \"Graduate\", \"specialInterestHousing\": \"Graduate\", \"educationAndStudentLife\": \"Undergraduate\", \"lifestyle&entertainment\": \"Greek Associations\", \"businessAndEntrepreneurship\": \"Greek Associations\"}','Urdu','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwicGFzc3dvcmQiOiIxMjM0NTY3OCIsImlhdCI6MTY4Njc0MTM4MiwiZXhwIjoxNjg2OTE0MTgyfQ.htFrvfN8b_gmPSn-SszoM2qOuD5SGWXcwqIV6-2-0KM','{\"images\": []}','[\"karachi\", \"islamabad\"]');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-14 18:05:37
+-- Dump completed on 2023-06-14  7:55:47

@@ -51,9 +51,10 @@ const InterestMatching = () => {
     setIsLoading(true);
 
     try {
-      const profileData = formValues;
-      console.log("profileData");
-      console.log(profileData);
+      const profileData =  {
+        accordionList: JSON.stringify(formValues),
+      }; 
+     
       await userProfile(userId, token, profileData);
 
       toast.success("Profile added", { autoClose: 2000 });
