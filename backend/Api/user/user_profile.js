@@ -80,6 +80,7 @@ router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
   console.log(id);
   const { name, birthday, gender, current_city, email, known_languages, interest, cities } = req.body;
 
+
   try {
     console.log("interest", interest);
     if (gender === "undefined") {
@@ -126,6 +127,9 @@ router.put('/userprofile/:id', upload.array('images'), async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+
+ 
 
 router.get('/getuser/:id', (req, res) => {
   const { id } = req.params;
